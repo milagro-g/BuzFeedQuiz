@@ -1,39 +1,102 @@
-let  readlineSync  =  require('readline-sync');
+let readlineSync = require('readline-sync');
 
-let thisIsRight = 0;
-let thisIsWrong = 0;
+let personalityA = 0;
 
-function readiness() {
-  getStarted = readlineSync.question("Are you ready to begin\n");
-  if (getStarted === "yes") {
-    console.log("Challenge accecpted!\n");
+// letStart();
+function letStart() {
+  let answer = readlineSync.keyInYNStrict("Are you ready?");
+  if (answer) {
+    console.log("Let's begin! \n");
+  } else {
+    console.log("Whatever, this quiz was too cool for you anyway!\n");
+    letStart();
   }
-  else if (getStarted === "no") {
-    console.log("Bye felicia\n");
+}
+
+// QUESTION1;
+function questionOne() {
+  let answer = readlineSync.keyInYNStrict("Question 1. \n What's my favorite color?");
+  if (answer) {
+    console.log("Nice guess! It's green. \n");
+    personalityA += 1;
+  } else {
+    nestedQuestion();
   }
-  else { 
-      readiness();
+}
+
+function nestedQuestion() {
+  let answer = readlineSync.keyInYNStrict("What is more important to me ?");
+  if (answer) {
+    console.log("non materialistic things are the way to go.\n ");
+    personalityA += 2;
+  } else {
+    console.log("You know all we really care about is geting rich\n");
+    personalityA += 1;
+  }
+}
+
+function questionTwo() {
+  let answer = readlineSync.keyInYNStrict(" Question 2. \n If someone dropped their money, would you give it back to them?");
+  if (answer) {
+    personalityA += 2;
+  } else {
+    personalityA += 1;
+  }
+}
+
+let questionThree = () => {
+  let answersQuestionThree = ['Mercedes Benz', 'Lexus', 'BMW'],
+    index = readlineSync.keyInSelect(answersQuestionThree, 'Question 3. \n What is my favorite car? Pick a answer?', {
+      cancel: false
+    });
+    switch (index) {
+      case 0:
+        personalityA +=3;
+        break;
+      case 1:
+          personalityA +=2;
+          break;
+      case 2:
+        personalityA += 1;
+        break;
+      default:
+        questionThree();
     }
 }
+let questionFour = () => {
+  let answerQuestionFour = ['Duhhh', 'Nahhh'],
+    index = readlineSync.keyInSelect(answerQuestionFour, 'Question 4. \n Do you like the color pink?', {
+      cancel: false
+    });
+    switch (index) {
+      case 0:
+        personalityA += 1;
+        break;
+      case 1:
+        personalityA += 2;
+        break;
+        default:
+          questionFour();
+    }
+  }
+let questionFive = () => {
+  let answerQuestionFive = ['Doing big things', 'living at my moms house', 'being a couch potato'],
+  index = readlineSync.keyInSelect(answersQuestionFive, 'Question 5. \n Where do you see yourself in the next 10 years? Pick a answer',{
+    cancel: false
+  });
 
-function questionOne() {
-  getStarted = readlineSync.question("When is Sage's birthday");
-  if (getStarted = "October 19, 2018")
-  console.log(" wowwwww! so proud!");
+  switch (index) {
+    case 0:
+      nestedQuestion1()
+      personalityA += 3;
+      break;
+    case 1:
+      personalityA += 2;
+      break;
+    case 2:
+      personalityA += 1;
+      break;
+      default:
+        questionFive();
+  }
 }
- // write some code that displays a question and some answer choices to a user
-// write some code that changes the value of your variables based on how the user responds
-
-function calculateLove() {
-// write some code that compares your variables to each other and displays different results to your user based on those comparisons.
-}
-
-console.log("WELCOME TO CECE'S LOVE CALCULATOR!\n")
-
-let name = readlineSync.question( "What is your name?\n")
-
-console.log(`Ok ${name}. I'm going to ask you a series of questions. Based on your answers, I'm going to tell you whether your crush likes you back.\n`)
-
-readiness();
-questionOne();
-calculateLove();
