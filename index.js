@@ -15,9 +15,9 @@ function letStart() {
 
 // QUESTION1;
 function questionOne() {
-  let answer = readlineSync.keyInYNStrict("Question 1. \n What's my favorite color?");
+  let answer = readlineSync.keyInYNStrict("Question 1. \n Do you put your ketchup on the side or on your fries?");
   if (answer) {
-    console.log("Nice guess! It's green. \n");
+    console.log("On the side! \n");
     personalityA += 1;
   } else {
     nestedQuestion();
@@ -25,7 +25,7 @@ function questionOne() {
 }
 
 function nestedQuestion() {
-  let answer = readlineSync.keyInYNStrict("What is more important to me ?");
+  let answer = readlineSync.keyInYNStrict("What is more important?");
   if (answer) {
     console.log("non materialistic things are the way to go.\n ");
     personalityA += 2;
@@ -46,7 +46,7 @@ function questionTwo() {
 
 let questionThree = () => {
   let answersQuestionThree = ['Mercedes Benz', 'Lexus', 'BMW'],
-    index = readlineSync.keyInSelect(answersQuestionThree, 'Question 3. \n What is my favorite car? Pick a answer?', {
+    index = readlineSync.keyInSelect(answersQuestionThree, 'Question 3. \n What is your favorite car? Pick a answer?', {
       cancel: false
     });
     switch (index) {
@@ -100,3 +100,47 @@ let questionFive = () => {
         questionFive();
   }
 }
+let nestedQuestion1 = () => {
+  let answersQuestionSix = ['I try to do as much as i can!', 'sometimes', 'never'],
+    index = readlineSync.keyInSelect(answersQuestionSix, 'Question 6. \n How often do you do good deeds?', {
+      cancel: false
+    });
+
+  switch (index) {
+    case 0:
+      personalityA += 1;
+      break;
+    case 1:
+      personalityA += 1;
+      break;
+      case 2:
+      personalityA += 1;
+      break;
+    default:
+      nestedQuestion1();
+  }
+}
+function calculateType() {
+  console.log('\n\n');
+  if (personalityA >= 10) {
+    console.log('Awesome and great person and we need more of you');
+  } else if (personalityA >= 6) {
+    console.log('Funny, i bet we can crack a couple jokes');
+  } else if (personalityA >= 4) {
+    console.log('Oof... I may think you are a weirdooo. Just kidding! Im sure you are awesome');
+  }
+}
+//
+console.log("Discover what type of person i think you are!\n")
+//
+let name = readlineSync.question("What is your name?\n")
+//
+console.log(`Hi ${name}. I'm going to ask you a series of questions. Based on your answers, I'm going to tell you what type of person i think you are\n`)
+
+letStart();
+questionOne();
+questionTwo();
+questionThree()
+questionFour();
+questionFive();
+calculateType();
